@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hollow Knight DLC</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.cdnfonts.com/css/trajan-pro" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Trajan Pro', serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 0;
+        }
+        
+        body.fade-in::before {
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        
+        body.no-animation::before {
+            opacity: 1;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen relative overflow-hidden">
+    <script>
+        // Check if we came from a DLC page
+        const fromPage = sessionStorage.getItem('fromPage');
+        if (fromPage) {
+            document.body.classList.add('fade-in');
+            sessionStorage.removeItem('fromPage');
+        } else {
+            document.body.classList.add('no-animation');
+        }
+    </script>
+    
+    <!-- Center Counter -->
+    <div class="fixed inset-0 flex items-center justify-center pointer-events-none">
+        <div id="counter" class="text-white text-9xl font-bold opacity-50">0</div>
+    </div>
+    
+    <script>
+        // Update counter display from localStorage
+        function updateCounter() {
+            const counter = localStorage.getItem('hollowKnightCounter') || '0';
+            document.getElementById('counter').textContent = counter;
+        }
+        // Update on page load
+        updateCounter();
+    </script>
+    
+    <!-- Top-Left: Hidden Dreams (Purple) -->
+    <a href="pages/hidden-dreams.html" 
+       class="absolute top-0 left-0 m-8 bg-purple-600 bg-opacity-30 px-8 py-6 rounded-lg text-white text-xl font-semibold transition-all duration-300 hover:bg-opacity-50 hover:scale-105">
+        Hidden Dreams
+    </a>
+    
+    <!-- Top-Right: Lifeblood (Blue) -->
+    <a href="pages/lifeblood.html" 
+       class="absolute top-0 right-0 m-8 bg-blue-500 bg-opacity-30 px-8 py-6 rounded-lg text-white text-xl font-semibold transition-all duration-300 hover:bg-opacity-50 hover:scale-105">
+        Lifeblood
+    </a>
+    
+    <!-- Bottom-Left: The Grimm Troupe (Red) -->
+    <a href="pages/grimm-troupe.html" 
+       class="absolute bottom-0 left-0 m-8 bg-red-600 bg-opacity-30 px-8 py-6 rounded-lg text-white text-xl font-semibold transition-all duration-300 hover:bg-opacity-50 hover:scale-105">
+        The Grimm Troupe
+    </a>
+    
+    <!-- Bottom-Right: Godmaster (Gold) -->
+    <a href="pages/godmaster.html" 
+       class="absolute bottom-0 right-0 m-8 bg-yellow-500 bg-opacity-30 px-8 py-6 rounded-lg text-white text-xl font-semibold transition-all duration-300 hover:bg-opacity-50 hover:scale-105">
+        Godmaster
+    </a>
+    
+</body>
+</html>

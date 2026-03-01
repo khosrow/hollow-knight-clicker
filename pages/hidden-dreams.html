@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Dreams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.cdnfonts.com/css/trajan-pro" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Trajan Pro', serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        body::before {
+            background-image: url('../images/background.jpg');
+            animation: fadeOut 2s ease-in-out forwards;
+        }
+        
+        body::after {
+            background-image: url('../images/hidden-dreams-bg.jpg');
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    
+    <!-- Back Button -->
+    <a href="../index.html" 
+       onclick="sessionStorage.setItem('fromPage', 'hidden-dreams')"
+       class="fixed top-8 left-8 bg-purple-600 bg-opacity-30 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300 hover:bg-opacity-50">
+        ← Back
+    </a>
+    
+    <!-- Center Icon and Button -->
+    <div class="fixed inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <img src="https://cdn.wikimg.net/en/hkwiki/images/0/04/Hidden_Dreams_Icon.png" 
+             alt="Hidden Dreams Icon" 
+             id="hiddenDreamsIcon"
+             class="w-32 h-32 opacity-80 cursor-pointer transition-transform hover:scale-110 pointer-events-auto mb-6">
+        
+        <button id="dreamNailBtn"
+                class="bg-purple-600 bg-opacity-30 px-8 py-3 rounded-lg text-white text-lg font-semibold transition-all duration-300 hover:bg-opacity-50 pointer-events-auto">
+            Dream Nail
+        </button>
+    </div>
+    
+    <script>
+        let multiplier = 1;
+        let multiplierActive = false;
+        
+        // Icon click handler
+        document.getElementById('hiddenDreamsIcon').addEventListener('click', function() {
+            // Get current counter value from localStorage
+            let counter = parseInt(localStorage.getItem('hollowKnightCounter') || '0');
+            // Increment by current multiplier
+            counter += multiplier;
+            // Save back to localStorage
+            localStorage.setItem('hollowKnightCounter', counter.toString());
+            console.log('Counter incremented by', multiplier, 'to:', counter);
+        });
+        
+        // Dream Nail button click handler
+        document.getElementById('dreamNailBtn').addEventListener('click', function() {
+            if (multiplierActive) return; // Already active, do nothing
+            
+            multiplierActive = true;
+            multiplier = 10;
+            
+            // Visual feedback - change button appearance
+            const btn = document.getElementById('dreamNailBtn');
+            btn.textContent = 'Dream Nail (Active!)';
+            btn.classList.add('bg-opacity-60');
+            
+            console.log('Dream Nail activated! 10x multiplier for 10 seconds');
+            
+            // After 10 seconds, reset multiplier
+            setTimeout(function() {
+                multiplier = 1;
+                multiplierActive = false;
+                btn.textContent = 'Dream Nail';
+                btn.classList.remove('bg-opacity-60');
+                console.log('Dream Nail expired. Back to 1x multiplier');
+            }, 10000); // 10 seconds
+        });
+    </script>
+    
+    <!-- Page Content Area -->
+    <div class="container mx-auto px-4 py-20">
+        <h1 class="text-5xl font-bold text-purple-400 text-center mb-8">Hidden Dreams</h1>
+        
+        <!-- Empty content area ready for customization -->
+        <div class="text-white">
+            <!-- Add your content here -->
+        </div>
+    </div>
+    
+</body>
+</html>

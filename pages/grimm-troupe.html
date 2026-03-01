@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grimm Troupe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.cdnfonts.com/css/trajan-pro" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Trajan Pro', serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            position: relative;
+        }
+        
+        body::before,
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        body::before {
+            background-image: url('../images/background.jpg');
+            animation: fadeOut 2s ease-in-out forwards;
+        }
+        
+        body::after {
+            background-image: url('../images/grimm-troupe-bg.jpg');
+            opacity: 0;
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    
+    <!-- Back Button -->
+    <a href="../index.html" 
+       onclick="sessionStorage.setItem('fromPage', 'grimm-troupe')"
+       class="fixed top-8 left-8 bg-red-600 bg-opacity-30 px-6 py-3 rounded-lg text-white font-semibold transition-all duration-300 hover:bg-opacity-50">
+        ← Back
+    </a>
+    
+    <!-- Page Content Area -->
+    <div class="container mx-auto px-4 py-20">
+        <h1 class="text-5xl font-bold text-red-400 text-center mb-8">The Grimm Troupe</h1>
+        
+        <!-- Empty content area ready for customization -->
+        <div class="text-white">
+            <!-- Add your content here -->
+        </div>
+    </div>
+    
+</body>
+</html>
